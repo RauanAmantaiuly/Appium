@@ -1,0 +1,65 @@
+{
+  "platformName": "android",
+  "appium:isRemote": true,
+  "appium:remoteConnectionUrl": "http://127.0.0.1:4723/",
+  "appium:driverSettings": {
+    "android": {
+      "deviceKey": "Samsung Galaxy S20 FE",
+      "capabilities": {
+        "platformName": "Android",
+        "automationName": "UiAutomator2",
+        "locale": "US",
+        "language": "en",
+        "appPackage": "org.joinmastodon.android",
+        "appActivity": "org.joinmastodon.android.MainActivity",
+        "autoLaunch": false,
+        "newCommandTimeout": "120",
+        "fullReset": false,
+        "noReset": true,
+        "enforceXPath1": true,
+        "allowInvisibleElements": true,
+        "adbExecTimeout": 60000,
+        "androidInstallTimeout": 120000,
+        "uiautomator2ServerInstallTimeout": 120000
+      }
+    }
+  },
+  "appium:localServiceSettings": {
+    "arguments": {
+      "--allow-insecure": "chromedriver_autodownload"
+    },
+    "capabilities": {}
+  },
+  "appium:timeouts": {
+    "timeoutImplicit": 0,
+    "timeoutCondition": 45,
+    "timeoutPollingInterval": 300,
+    "timeoutCommand": 180
+  },
+  "appium:retry": {
+    "number": 2,
+    "pollingInterval": 300
+  },
+  "appium:logger": {
+    "language": "en"
+  },
+  "appium:elementCache": {
+    "isEnabled": true
+  },
+  "appium:touchActions": {
+    "swipe": {
+      "duration": 1,
+      "retries": 5,
+      "verticalOffset": 0.2,
+      "horizontalOffset": 0.5
+    }
+  },
+  "appium:visualization": {
+    "imageExtension": "png",
+    "maxFullFileNameLength": 255,
+    "defaultThreshold": 0.012,
+    "comparisonWidth": 16,
+    "comparisonHeight": 16,
+    "pathToDumps": "./src/test/resources/visualDumps/"
+  }
+}
