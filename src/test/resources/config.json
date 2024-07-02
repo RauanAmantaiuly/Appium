@@ -6,10 +6,10 @@
     "use-plugins":["images"],
     "driver": {
       "xcuitest":{
-        "webdriveragent-port": 8101
+        "webdriveragent-port": 8100
       },
       "uiautomator2": {
-        "webdriveragent-port": 8101
+        "webdriveragent-port": 8100
       }
     }
   }

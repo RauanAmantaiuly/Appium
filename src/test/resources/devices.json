@@ -2,7 +2,8 @@
   "Samsung Galaxy S20 FE": {
     "capabilities": {
       "platformVersion": "13.0",
-      "udid": "RZCT80ZZNAZ"
+      "udid": "RZCT80ZZNAZ",
+      "deviceName": "Samsung s20"
     }
   }
 }
