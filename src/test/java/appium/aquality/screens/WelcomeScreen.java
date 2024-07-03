@@ -17,6 +17,9 @@ public class WelcomeScreen extends Screen {
     public void clickLoginBtn(){
         loginBtn.click();
     }
+    public boolean isLoginBtnDispalyed(){
+        return loginBtn.state().waitForDisplayed();
+    }
 
 
 }

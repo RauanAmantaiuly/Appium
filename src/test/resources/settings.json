@@ -8,7 +8,7 @@
       "deviceKey": "Samsung Galaxy S20 FE",
       "capabilities": {
         "platformName": "Android",
-        "automationName": "UiAutomator2",
+        "automationName": "uiautomator2",
         "appPackage": "org.joinmastodon.android",
         "appActivity": "org.joinmastodon.android.MainActivity",
         "autoLaunch": true,
