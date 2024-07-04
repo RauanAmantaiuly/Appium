@@ -1,4 +1,4 @@
-package appium.aquality.tests;
+package appium.tests;
 
 import aquality.appium.mobile.application.IMobileApplication;
 import aquality.appium.mobile.application.AqualityServices;

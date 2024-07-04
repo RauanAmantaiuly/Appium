@@ -11,7 +11,7 @@
         "automationName": "uiautomator2",
         "appPackage": "org.joinmastodon.android",
         "appActivity": "org.joinmastodon.android.MainActivity",
-        "autoLaunch": true,
+        "autoLaunch": false,
         "enforceXPath1": true,
         "allowInvisibleElements": true
       }
