@@ -16,6 +16,7 @@ public class ExploreScreen extends Screen {
     private By postForm = By.className("android.widget.RelativeLayout");
     private By goToSearch = By.id("org.joinmastodon.android:id/search_text");
     private By searchField = By.className("android.widget.EditText");
+//    //android.widget.EditText[@text="Search Mastodon"]
 
     private IButton exploreTabBtn = elementFactory.getButton(exploreTab, "Explore tab");
     private ILabel firstPostLbl = elementFactory.getLabel(firstPost, "First Post");
@@ -39,13 +40,16 @@ public class ExploreScreen extends Screen {
         return postFormLbl.state().waitForDisplayed();
     }
     public String getPositionOfSearchField(){
-        int x = searchTextBox.getElement().getLocation().getX();
-        int y = searchTextBox.getElement().getLocation().getY();
+        int x = goToSearchTextBox.getElement().getLocation().getX();
+        int y = goToSearchTextBox.getElement().getLocation().getY();
         String position = x + ":" + y;
         return position;
     }
     public void clickSearchField(){
         goToSearchTextBox.click();
+    }
+    public boolean isSearchFieldDisplayed(){
+        return searchTextBox.state().waitForDisplayed();
     }
     public void sendTextToSearchField(String s){
         searchTextBox.clearAndType(s);

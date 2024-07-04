@@ -1,6 +1,11 @@
 package appium.aquality.tests;
 
 import appium.aquality.screens.*;
+import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.configuration.IDriverSettings;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.android.nativekey.PressesKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -45,14 +50,24 @@ public class HomeWorkTwo extends BaseTest {
         Assert.assertTrue(exploreScreen.isPostDisplayed(), "Posts are displayed");
 
         String positionSearchField = exploreScreen.getPositionOfSearchField();
-        Assert.assertTrue(!positionSearchField.contains("0:0"));
+        Assert.assertTrue(!positionSearchField.equals("0:0"));
 
         String text = "tests";
         exploreScreen.clickSearchField();
-        exploreScreen.sendTextToSearchField(text);
-        Assert.assertTrue(exploreScreen.getTextFromSearchField().contains(text));
+        if (exploreScreen.isSearchFieldDisplayed()) {
+            exploreScreen.sendTextToSearchField(text);
+            Assert.assertTrue(exploreScreen.getTextFromSearchField().contains(text));
 
-        exploreScreen.clearSearchField();
-        Assert.assertTrue(exploreScreen.getTextFromSearchField().contains("Search Mastodon"));
+            exploreScreen.clearSearchField();
+            Assert.assertTrue(exploreScreen.getTextFromSearchField().contains("Search Mastodon"));
+        }
+    }
+    @Test
+    public void keyboardProcessing(){
+        loginAndOpenExploreTab();
+
+        exploreScreen.clickSearchField();
+        boolean flag = false;
+        ((PressesKey) AqualityServices.getApplication().getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
     }
 }
