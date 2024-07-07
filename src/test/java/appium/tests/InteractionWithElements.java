@@ -1,10 +1,11 @@
 package appium.tests;
 
 import appium.screens.*;
+import aquality.appium.mobile.actions.SwipeDirection;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SearchingForItems extends BaseTest{
+public class InteractionWithElements extends BaseTest{
 
     WelcomeScreen welcomeScreen = ScreenFactory.getWelcomeScreen();
     LoginStepsScreen loginStepsScreen = ScreenFactory.getLoginStepsScreen();
@@ -12,7 +13,7 @@ public class SearchingForItems extends BaseTest{
     ExploreScreen exploreScreen = ScreenFactory.getExploreScreen();
 
     @Test
-    public void searchForItems() {
+    public void interactionWithElements() {
         String mastodonSocialText = "mastodon.social";
         Assert.assertTrue(welcomeScreen.isLoginBtnDisplayed(), "Welcome screen is not displayed on app launch");
 
@@ -31,7 +32,20 @@ public class SearchingForItems extends BaseTest{
         exploreScreen.clickExploreTab();
         Assert.assertTrue(exploreScreen.state().waitForDisplayed(), "Posts screen is not displayed");
 
-        exploreScreen.clickFirstPost();
-        Assert.assertTrue(exploreScreen.isFirstPostOpened(), "First post is not opened");
+        Assert.assertTrue(exploreScreen.isPostDisplayed(), "Posts are displayed");
+
+        String positionSearchField = exploreScreen.getPositionOfSearchField();
+        Assert.assertTrue(!positionSearchField.equals("0:0"));
+
+        String text = "tests";
+        exploreScreen.clickSearchField();
+        exploreScreen.sendTextToSearchField(text);
+
+        exploreScreen.clickFirstPostAfterSearch();
+
+        while (!exploreScreen.isFourthPostDisplayed()) {
+            exploreScreen.getElementFourthPost().getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        }
+        Assert.assertTrue(exploreScreen.isFourthPostDisplayed(), "4th post is not displayed");
     }
 }
