@@ -1,25 +1,38 @@
 package appium.tests;
 
 import appium.screens.*;
-import aquality.appium.mobile.actions.SwipeDirection;
+import appium.utils.JsonUtils;
+import appium.utils.SettingsUtils;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class InteractionWithElements extends BaseTest{
+import java.io.IOException;
 
-    WelcomeScreen welcomeScreen = ScreenFactory.getWelcomeScreen();
-    LoginStepsScreen loginStepsScreen = ScreenFactory.getLoginStepsScreen();
-    HomeScreen homeScreen = ScreenFactory.getHomeScreen();
-    ExploreScreen exploreScreen = ScreenFactory.getExploreScreen();
+public class InteractionWithElements extends BaseTest {
 
-    @Test
-    public void interactionWithElements() {
-        String mastodonSocialText = "mastodon.social";
+    WelcomeScreen welcomeScreen = ScreenFactory.getScreen(WelcomeScreen.class);
+    LoginStepsScreen loginStepsScreen = ScreenFactory.getScreen(LoginStepsScreen.class);
+    HomeScreen homeScreen = ScreenFactory.getScreen(HomeScreen.class);
+    ExploreScreen exploreScreen = ScreenFactory.getScreen(ExploreScreen.class);
+
+    @DataProvider(name = "jsonDataProvider")
+    public Object[][] jsonDataProvider() throws IOException {
+        String filePath = "src/test/resources/test_data/text_to_search.json";
+        JsonNode jsonNode = JsonUtils.readJsonFile(filePath);
+        String stringValue = jsonNode.get("string").asText();
+        return new Object[][]{{stringValue}};
+    }
+
+    @Test(dataProvider = "jsonDataProvider")
+    public void interactionWithElements(String text) throws IOException{
+        String mastodonSocialText = JsonUtils.getConfigValue("mastodonSocialText");
         Assert.assertTrue(welcomeScreen.isLoginBtnDisplayed(), "Welcome screen is not displayed on app launch");
 
-        application.terminate("org.joinmastodon.android");
+        application.terminate();
 
-        application.activate("org.joinmastodon.android");
+        application.activate(SettingsUtils.getAppPackage());
         Assert.assertTrue(welcomeScreen.isLoginBtnDisplayed(), "Welcome screen is not displayed on app launch");
 
         welcomeScreen.clickLoginBtn();
@@ -37,15 +50,11 @@ public class InteractionWithElements extends BaseTest{
         String positionSearchField = exploreScreen.getPositionOfSearchField();
         Assert.assertTrue(!positionSearchField.equals("0:0"));
 
-        String text = "tests";
         exploreScreen.clickSearchField();
         exploreScreen.sendTextToSearchField(text);
 
-        exploreScreen.clickFirstPostAfterSearch();
+        exploreScreen.clickFirstPost();
 
-        while (!exploreScreen.isFourthPostDisplayed()) {
-            exploreScreen.getElementFourthPost().getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        Assert.assertTrue(exploreScreen.isFourthPostDisplayed(), "4th post is not displayed");
+        exploreScreen.scrollToPostInProfile(4);
     }
 }
