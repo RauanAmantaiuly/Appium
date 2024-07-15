@@ -1,4 +1,4 @@
-package appium.aquality.screens;
+package appium.screens;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -16,6 +16,9 @@ public class WelcomeScreen extends Screen {
 
     public void clickLoginBtn(){
         loginBtn.click();
+    }
+    public boolean isLoginBtnDisplayed(){
+        return loginBtn.state().waitForDisplayed();
     }
 
 

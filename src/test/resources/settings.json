@@ -1,52 +1,46 @@
 {
   "platformName": "android",
-  "appium:isRemote": true,
-  "appium:remoteConnectionUrl": "http://127.0.0.1:4723/",
-  "appium:driverSettings": {
+  "isRemote": true,
+  "remoteConnectionUrl": "http://127.0.0.1:4723",
+  "screensLocation": "appium/aquality/screens",
+  "driverSettings": {
     "android": {
       "deviceKey": "Samsung Galaxy S20 FE",
       "capabilities": {
         "platformName": "Android",
-        "automationName": "UiAutomator2",
-        "locale": "US",
-        "language": "en",
+        "automationName": "uiautomator2",
         "appPackage": "org.joinmastodon.android",
         "appActivity": "org.joinmastodon.android.MainActivity",
-        "autoLaunch": false,
-        "newCommandTimeout": "120",
-        "fullReset": false,
-        "noReset": true,
+        "autoLaunch": true,
         "enforceXPath1": true,
-        "allowInvisibleElements": true,
-        "adbExecTimeout": 60000,
-        "androidInstallTimeout": 120000,
-        "uiautomator2ServerInstallTimeout": 120000
+        "allowInvisibleElements": true
       }
     }
   },
-  "appium:localServiceSettings": {
+  "localServiceSettings": {
     "arguments": {
       "--allow-insecure": "chromedriver_autodownload"
     },
-    "capabilities": {}
+    "capabilities": {
+    }
   },
-  "appium:timeouts": {
+  "timeouts": {
     "timeoutImplicit": 0,
-    "timeoutCondition": 45,
+    "timeoutCondition": 15,
     "timeoutPollingInterval": 300,
-    "timeoutCommand": 180
+    "timeoutCommand": 120
   },
-  "appium:retry": {
+  "retry": {
     "number": 2,
     "pollingInterval": 300
   },
-  "appium:logger": {
+  "logger": {
     "language": "en"
   },
-  "appium:elementCache": {
+  "elementCache": {
     "isEnabled": true
   },
-  "appium:touchActions": {
+  "touchActions": {
     "swipe": {
       "duration": 1,
       "retries": 5,
@@ -54,7 +48,7 @@
       "horizontalOffset": 0.5
     }
   },
-  "appium:visualization": {
+  "visualization": {
     "imageExtension": "png",
     "maxFullFileNameLength": 255,
     "defaultThreshold": 0.012,
