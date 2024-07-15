@@ -53,8 +53,12 @@ public class ExploreScreen extends Screen {
         Assert.assertTrue(accCover.state().isDisplayed(), "Account cover is not displayed");
         int cnt=0;
         while(cnt!=index){
-            postFormLbl.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-            cnt++;
+            if (postFormLbl.state().isDisplayed()){
+                postFormLbl.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+                cnt++;
+            } else {
+                postFormLbl.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+            }
         }
     }
 }
